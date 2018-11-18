@@ -1,0 +1,49 @@
+[System]
+Name='SPECT'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='nn_output1'
+Range=[0 1]
+NumMFs=3
+MF1='Medium':'trimf',[0.2 0.5 0.8]
+MF2='Low':'trapmf',[0 0 0.1 0.5]
+MF3='High':'trapmf',[0.5 0.9 1 1]
+
+[Input2]
+Name='nn_output2'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 0.1 0.5]
+MF2='High':'trapmf',[0.5 0.9 1 1]
+MF3='Medium':'trimf',[0.2 0.5 0.8]
+
+[Output1]
+Name='Risk'
+Range=[0 100]
+NumMFs=5
+MF1='very_low':'trapmf',[0 0 10 25]
+MF2='very_high':'trapmf',[75 90 100 100]
+MF3='low':'trimf',[10 25 40]
+MF4='moderate':'trimf',[25 50 75]
+MF5='high':'trimf',[60 75 90]
+
+[Rules]
+2 1, 4 (1) : 1
+2 3, 5 (1) : 1
+2 2, 2 (1) : 1
+1 1, 3 (1) : 1
+1 3, 4 (1) : 1
+1 2, 5 (1) : 1
+3 1, 1 (1) : 1
+3 3, 3 (1) : 1
+3 2, 4 (1) : 1
