@@ -1,0 +1,62 @@
+[System]
+Name='Centre_1'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=12
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='mean_delay'
+Range=[0 0.7]
+NumMFs=3
+MF1='S':'trimf',[0.1 0.3 0.5]
+MF2='VS':'trapmf',[0 0 0.1 0.3]
+MF3='M':'trapmf',[0.4 0.6 0.7 0.7]
+
+[Input2]
+Name='number_of_servers'
+Range=[0 1]
+NumMFs=3
+MF1='S':'trapmf',[0 0 0.15 0.35]
+MF2='M':'trimf',[0.3 0.5 0.7]
+MF3='L':'trapmf',[0.6 0.8 1 1]
+
+[Input3]
+Name='utilisation_factor'
+Range=[0 1]
+NumMFs=3
+MF1='L':'trapmf',[0 0 0.4 0.6]
+MF2='H':'trapmf',[0.6 0.8 1 1]
+MF3='M':'trimf',[0.4 0.6 0.8]
+
+[Output1]
+Name='number_of_spares'
+Range=[0 1]
+NumMFs=7
+MF1='S':'trimf',[0 0.2 0.4]
+MF2='RS':'trimf',[0.25 0.35 0.45]
+MF3='RL':'trimf',[0.55 0.65 0.75]
+MF4='L':'trimf',[0.6 0.8 1]
+MF5='VS':'trapmf',[0 0 0.1 0.3]
+MF6='VL':'trapmf',[0.7 0.9 1 1]
+MF7='M':'trimf',[0.3 0.5 0.7]
+
+[Rules]
+0 0 1, 1 (1) : 1
+0 0 3, 7 (1) : 1
+0 0 2, 4 (1) : 1
+2 1 0, 6 (1) : 1
+1 1 0, 4 (1) : 1
+3 1 0, 7 (1) : 1
+2 2 0, 3 (1) : 1
+1 2 0, 2 (1) : 1
+3 2 0, 1 (1) : 1
+2 3 0, 7 (1) : 1
+1 3 0, 1 (1) : 1
+3 3 0, 5 (1) : 1
